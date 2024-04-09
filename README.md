@@ -51,6 +51,9 @@ Visualizations provide insight into DRM discussions within user reviews and thei
 ### DRM Relevance vs. Product Ratings
 ![](/data/graphs/drm_relevance_vs_rating.png)
 
+### DRM Relevance vs. Product Ratings (Boxplot distribution)
+![](/data/graphs/drm_relevance_distribution_by_rating_band.png)
+
 ### Product Ratings Over Time
 ![](/data/graphs/ratings_over_time.png)
 

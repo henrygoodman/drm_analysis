@@ -42,7 +42,8 @@ def plot_reviews_with_drm_relevance(filename: str):
         total_points += len(group)
         valid_points = group.dropna(subset=['date', 'drm_relevance'])
         plotted_points += len(valid_points)
-        plt.scatter(valid_points['date'], valid_points['drm_relevance'], s=valid_points['normalized_rating'], label=app, alpha=0.6)
+        avg_rating = group['rating'].mean()
+        plt.scatter(valid_points['date'], valid_points['drm_relevance'], s=valid_points['normalized_rating'], label=f"{app} (Avg Rating: {avg_rating:.2f})", alpha=0.6)
         invalid_points = group[group.isna().any(axis=1)]
         if not invalid_points.empty:
             print(f"Unplotted points for {app}:")
@@ -75,7 +76,8 @@ def plot_ratings_over_time(filename: str):
         total_points += len(group)
         valid_points = group.dropna(subset=['date', 'rating'])
         plotted_points += len(valid_points)
-        plt.scatter(valid_points['date'], valid_points['rating'], label=app, alpha=0.6)
+        avg_rating = group['rating'].mean()
+        plt.scatter(valid_points['date'], valid_points['rating'], label=f"{app} (Avg Rating: {avg_rating:.2f})", alpha=0.6)
         invalid_points = group[group.isna().any(axis=1)]
         if not invalid_points.empty:
             print(f"Unplotted points for {app}:")
@@ -122,7 +124,37 @@ def plot_drm_relevance_vs_rating(filename: str):
     plt.grid(True)
     plt.savefig(output_dir + '/drm_relevance_vs_rating.png')
 
+def plot_drm_relevance_by_rating_band(filename: str):
+    reviews = load_reviews_with_drm_relevance(filename)
+    reviews_data = []
+    for app, app_reviews in reviews.items():
+        for review in app_reviews:
+            review['app'] = app
+            reviews_data.append(review)
+    reviews_df = pd.DataFrame(reviews_data)
+    
+    reviews_df['drm_relevance'] = pd.to_numeric(reviews_df['drm_relevance'], errors='coerce')
+    reviews_df['rating'] = pd.to_numeric(reviews_df['rating'], errors='coerce')
+    reviews_df.dropna(subset=['drm_relevance', 'rating'], inplace=True)
+
+    # Adjust the bins for normalized ratings
+    rating_labels = ['Low (0-0.25)', 'Medium (0.25-0.5)', 'High (0.5-0.75)', 'Very High (0.75-1)']
+    reviews_df['rating_band'] = pd.cut(reviews_df['rating'], bins=[0, 0.25, 0.5, 0.75, 1], labels=rating_labels, include_lowest=True)
+
+    plt.figure(figsize=(12, 6))
+    # Boxplot of DRM Relevance for each Rating Band
+    reviews_df.boxplot(column='drm_relevance', by='rating_band', vert=False, grid=True, patch_artist=True)
+
+    plt.title('DRM Relevance Distribution by Rating Band')
+    plt.suptitle('')
+    plt.xlabel('DRM Relevance Score')
+    plt.ylabel('Rating Band')
+    plt.grid(True, linestyle='--', linewidth=0.5, alpha=0.7)
+    plt.savefig(output_dir + '/drm_relevance_distribution_by_rating_band.png')
+
+
 def generate_plots(filename):
     plot_reviews_with_drm_relevance(filename)
     plot_ratings_over_time(filename)
     plot_drm_relevance_vs_rating(filename)
+    plot_drm_relevance_by_rating_band(filename)
