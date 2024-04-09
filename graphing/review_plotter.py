@@ -54,6 +54,7 @@ def plot_reviews_with_drm_relevance(filename: str):
     plt.title('Reviews DRM Relevance over Time with Normalized Product Ratings')
     plt.legend()
     plt.grid(True)
+    plt.tight_layout()
     plt.savefig(output_dir + '/drm_relevance_with_ratings_over_time.png')
 
 def plot_ratings_over_time(filename: str):
@@ -88,6 +89,7 @@ def plot_ratings_over_time(filename: str):
     plt.title('Normalized Product Ratings over Time')
     plt.legend()
     plt.grid(True)
+    plt.tight_layout()
     plt.savefig(output_dir + '/ratings_over_time.png')
 
 def plot_drm_relevance_vs_rating(filename: str):
@@ -122,6 +124,7 @@ def plot_drm_relevance_vs_rating(filename: str):
     plt.title('DRM Relevance vs Rating Analysis')
     plt.legend()
     plt.grid(True)
+    plt.tight_layout()
     plt.savefig(output_dir + '/drm_relevance_vs_rating.png')
 
 def plot_drm_relevance_by_rating_band(filename: str):
@@ -150,6 +153,7 @@ def plot_drm_relevance_by_rating_band(filename: str):
     plt.xlabel('DRM Relevance Score')
     plt.ylabel('Rating Band')
     plt.grid(True, linestyle='--', linewidth=0.5, alpha=0.7)
+    plt.tight_layout()
     plt.savefig(output_dir + '/drm_relevance_distribution_by_rating_band.png')
 
 
