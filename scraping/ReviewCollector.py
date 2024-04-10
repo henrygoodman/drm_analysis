@@ -6,10 +6,8 @@ class ReviewCollector:
 
     def collect_reviews(self, sources: dict) -> dict:
         all_reviews = {}
-        for app_name, region_urls in sources.items():
-            all_reviews[app_name] = []
-            for region, url in region_urls.items():
-                reviews = self.scraper.scrape_reviews(url, region)
-                if reviews:
-                    all_reviews[app_name].extend(reviews)
+        for app_name, url in sources.items():
+            reviews = self.scraper.scrape_reviews(url)
+            if reviews:
+                all_reviews[app_name] = reviews
         return all_reviews

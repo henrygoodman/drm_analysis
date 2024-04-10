@@ -25,10 +25,12 @@ def parse_date(date_str):
 def plot_reviews_with_drm_relevance(filename: str):
     reviews = load_reviews_with_drm_relevance(filename)
     reviews_data = []
+
     for app, app_reviews in reviews.items():
         for review in app_reviews:
-            review['app'] = app
-            reviews_data.append(review)
+            if review.get('rating') is not None:  # Ensure rating is not None
+                review['app'] = app  # Add the 'app' field to each review
+                reviews_data.append(review)
     reviews_df = pd.DataFrame(reviews_data)
     reviews_df['date'] = reviews_df['date'].apply(parse_date)
     reviews_df = reviews_df[reviews_df['date'].dt.year >= 2015]
@@ -60,10 +62,12 @@ def plot_reviews_with_drm_relevance(filename: str):
 def plot_ratings_over_time(filename: str):
     reviews = load_reviews_with_drm_relevance(filename)
     reviews_data = []
+
     for app, app_reviews in reviews.items():
         for review in app_reviews:
-            review['app'] = app
-            reviews_data.append(review)
+            if review.get('rating') is not None:  # Ensure rating is not None
+                review['app'] = app  # Add the 'app' field to each review
+                reviews_data.append(review)
     reviews_df = pd.DataFrame(reviews_data)
     reviews_df['date'] = reviews_df['date'].apply(parse_date)
     reviews_df = reviews_df[reviews_df['date'].dt.year >= 2015]
@@ -95,10 +99,13 @@ def plot_ratings_over_time(filename: str):
 def plot_drm_relevance_vs_rating(filename: str):
     reviews = load_reviews_with_drm_relevance(filename)
     reviews_data = []
+
     for app, app_reviews in reviews.items():
         for review in app_reviews:
-            review['app'] = app
-            reviews_data.append(review)
+            if review.get('rating') is not None:  # Ensure rating is not None
+                review['app'] = app  # Add the 'app' field to each review
+                reviews_data.append(review)
+
     reviews_df = pd.DataFrame(reviews_data)
     
     # Ensure 'drm_relevance' and 'rating' are in the correct format and handle missing values
@@ -130,10 +137,12 @@ def plot_drm_relevance_vs_rating(filename: str):
 def plot_drm_relevance_by_rating_band(filename: str):
     reviews = load_reviews_with_drm_relevance(filename)
     reviews_data = []
+
     for app, app_reviews in reviews.items():
         for review in app_reviews:
-            review['app'] = app
-            reviews_data.append(review)
+            if review.get('rating') is not None:  # Ensure rating is not None
+                review['app'] = app  # Add the 'app' field to each review
+                reviews_data.append(review)
     reviews_df = pd.DataFrame(reviews_data)
     
     reviews_df['drm_relevance'] = pd.to_numeric(reviews_df['drm_relevance'], errors='coerce')
