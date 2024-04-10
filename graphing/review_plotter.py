@@ -165,30 +165,69 @@ def plot_drm_relevance_by_rating_band(filename: str):
     plt.tight_layout()
     plt.savefig(output_dir + '/drm_relevance_distribution_by_rating_band.png')
 
-def calculate_drm_relevance_ratio(reviews_data: dict, relevance_threshold: float = 0.2) -> dict:
+def calculate_drm_relevance_ratio(reviews_data: dict, relevance_threshold: float = 0.2, rating_threshold: float = 1.0) -> dict:
     product_ratios = {}
     for product, reviews in reviews_data.items():
         total_reviews = len(reviews)
-        relevant_reviews = sum(1 for review in reviews if float(review.get('drm_relevance', 0)) > relevance_threshold)
+        # Filter reviews based on rating threshold, handling None values explicitly
+        low_rating_reviews = [review for review in reviews if review['rating'] is not None and float(review['rating']) < rating_threshold]
+        relevant_reviews = sum(1 for review in low_rating_reviews if review['drm_relevance'] is not None and float(review['drm_relevance']) > relevance_threshold)
+        # Calculate the ratio based on the count of low rating reviews
         ratio = relevant_reviews / total_reviews if total_reviews > 0 else 0
         product_ratios[product] = ratio
     return product_ratios
 
 def plot_drm_relevance_ratio(filename):
-    threshold = 0.2
-    reviews = load_reviews_with_drm_relevance(filename)
-    product_ratios = calculate_drm_relevance_ratio(reviews, threshold)
-    sorted_ratios = {k: v for k, v in sorted(product_ratios.items(), key=lambda item: item[1], reverse=True)}
-    products = list(sorted_ratios.keys())
-    ratios = list(sorted_ratios.values())
+    threshold = 0.2  # This is the relevance threshold for DRM
+    reviews_data = load_reviews_with_drm_relevance(filename)
+    product_ratios = calculate_drm_relevance_ratio(reviews_data, threshold, 1.0)
+
+    # Sort products by ratio of reviews mentioning DRM
+    sorted_products = sorted(product_ratios.items(), key=lambda x: x[1], reverse=True)
+
+    # Prepare data for plotting
+    products, ratios = zip(*sorted_products)
 
     plt.figure(figsize=(10, 6))
-    plt.barh(products, ratios, color='skyblue')
+    bars = plt.barh(products, ratios, color='lightblue')
     plt.xlabel(f'Ratio of Reviews with DRM Relevance > {threshold}')
     plt.title(f'Ratio of Reviews with DRM Relevance > {threshold} by Product')
-    plt.gca().invert_yaxis()  # Invert y-axis to display highest ratio at the top
+    plt.gca().invert_yaxis()
+
+    # Annotate the bars with the ratio values
+    for bar in bars:
+        plt.text(bar.get_width(), bar.get_y() + bar.get_height() / 2, f'{bar.get_width():.2f}',
+                 va='center', ha='right', color='blue', fontsize=8)
+
     plt.tight_layout()
-    plt.savefig(output_dir + '/drm_relevance_ratio_by_product.png')
+    plt.savefig(f'{output_dir}/drm_relevance_ratio_by_product.png')
+
+def plot_negative_reviews_with_drm_relevance(filename: str):
+    relevance_threshold = 0.2  # Threshold for considering a review relevant to DRM
+    rating_threshold = 0.5  # Threshold for considering a review as negative
+
+    reviews_data = load_reviews_with_drm_relevance(filename)
+    product_ratios = calculate_drm_relevance_ratio(reviews_data, relevance_threshold, rating_threshold)
+
+    # Sort products by ratio of negative reviews mentioning DRM
+    sorted_products = sorted(product_ratios.items(), key=lambda x: x[1], reverse=True)
+
+    # Prepare data for plotting
+    products, ratios = zip(*sorted_products)
+
+    plt.figure(figsize=(10, 6))
+    bars = plt.barh(products, ratios, color='salmon')
+    plt.xlabel(f'Ratio of Negative Reviews (Rating < {rating_threshold}) Mentioning DRM > {relevance_threshold}')
+    plt.title(f'Ratio of Negative Reviews Mentioning DRM by Product')
+    plt.gca().invert_yaxis()
+
+    # Annotate the bars with the ratio values
+    for bar in bars:
+        plt.text(bar.get_width(), bar.get_y() + bar.get_height() / 2, f'{bar.get_width():.2f}',
+                 va='center', ha='right', color='blue', fontsize=8)
+
+    plt.tight_layout()
+    plt.savefig(f'{output_dir}/negative_reviews_with_drm_relevance.png')
 
 def generate_plots(filename):
     plot_reviews_with_drm_relevance(filename)
@@ -196,3 +235,4 @@ def generate_plots(filename):
     plot_drm_relevance_vs_rating(filename)
     plot_drm_relevance_by_rating_band(filename)
     plot_drm_relevance_ratio(filename)
+    plot_negative_reviews_with_drm_relevance(filename)
