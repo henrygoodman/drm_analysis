@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from scraping.ReviewScraper import ReviewScraper
 from datetime import datetime
 
-NUM_PAGES = 10
+NUM_PAGES = 80
 
 # TrustPilot shows the same reviews no matter the region
 REGIONS = {

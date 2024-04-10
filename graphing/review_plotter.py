@@ -140,30 +140,31 @@ def plot_drm_relevance_by_rating_band(filename: str):
 
     for app, app_reviews in reviews.items():
         for review in app_reviews:
-            if review.get('rating') is not None:  # Ensure rating is not None
+            if review.get('rating') is not None and float(review.get('drm_relevance', 0)) > 0:  # Ensure rating is not None and DRM relevance > 0
                 review['app'] = app  # Add the 'app' field to each review
                 reviews_data.append(review)
+                
     reviews_df = pd.DataFrame(reviews_data)
     
     reviews_df['drm_relevance'] = pd.to_numeric(reviews_df['drm_relevance'], errors='coerce')
     reviews_df['rating'] = pd.to_numeric(reviews_df['rating'], errors='coerce')
     reviews_df.dropna(subset=['drm_relevance', 'rating'], inplace=True)
 
-    # Adjust the bins for normalized ratings
-    rating_labels = ['Low (0-0.25)', 'Medium (0.25-0.5)', 'High (0.5-0.75)', 'Very High (0.75-1)']
-    reviews_df['rating_band'] = pd.cut(reviews_df['rating'], bins=[0, 0.25, 0.5, 0.75, 1], labels=rating_labels, include_lowest=True)
+    # Adjust the bins for ratings
+    rating_labels = ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars']
+    reviews_df['rating_band'] = pd.cut(reviews_df['rating'], bins=[0.0, 0.2, 0.4, 0.6, 0.8, 1], labels=rating_labels, include_lowest=True)
 
-    plt.figure(figsize=(12, 6))
-    # Boxplot of DRM Relevance for each Rating Band
+    # Boxplot of DRM Relevance for each Rating Band, excluding DRM relevance = 0
     reviews_df.boxplot(column='drm_relevance', by='rating_band', vert=False, grid=True, patch_artist=True)
 
-    plt.title('DRM Relevance Distribution by Rating Band')
+    plt.title('DRM Relevance Distribution by Rating Band (Excluding Non-Mentioned)')
     plt.suptitle('')
     plt.xlabel('DRM Relevance Score')
     plt.ylabel('Rating Band')
     plt.grid(True, linestyle='--', linewidth=0.5, alpha=0.7)
     plt.tight_layout()
-    plt.savefig(output_dir + '/drm_relevance_distribution_by_rating_band.png')
+    plt.savefig(output_dir + '/drm_relevance_distribution_by_rating_band_excluding_non_mentioned.png')
+
 
 def calculate_drm_relevance_ratio(reviews_data: dict, relevance_threshold: float = 0.2, rating_threshold: float = 1.0) -> dict:
     product_ratios = {}
