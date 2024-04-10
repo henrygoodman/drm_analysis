@@ -51,6 +51,9 @@ Visualizations provide insight into DRM discussions within user reviews and thei
 ### Rankings Ratio of DRM Relavant Reviews to Total Reviews
 ![](/data/graphs/drm_relevance_ratio_by_product.png)
 
+### Rankings Ratio of DRM Relavant Reviews to Total Reviews (excluding positive reviews)
+![](/data/graphs/negative_reviews_with_drm_relevance.png)
+
 ### DRM Relevance vs. Product Ratings
 ![](/data/graphs/drm_relevance_vs_rating.png)
 
