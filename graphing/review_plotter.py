@@ -165,9 +165,34 @@ def plot_drm_relevance_by_rating_band(filename: str):
     plt.tight_layout()
     plt.savefig(output_dir + '/drm_relevance_distribution_by_rating_band.png')
 
+def calculate_drm_relevance_ratio(reviews_data: dict, relevance_threshold: float = 0.2) -> dict:
+    product_ratios = {}
+    for product, reviews in reviews_data.items():
+        total_reviews = len(reviews)
+        relevant_reviews = sum(1 for review in reviews if float(review.get('drm_relevance', 0)) > relevance_threshold)
+        ratio = relevant_reviews / total_reviews if total_reviews > 0 else 0
+        product_ratios[product] = ratio
+    return product_ratios
+
+def plot_drm_relevance_ratio(filename):
+    threshold = 0.2
+    reviews = load_reviews_with_drm_relevance(filename)
+    product_ratios = calculate_drm_relevance_ratio(reviews, threshold)
+    sorted_ratios = {k: v for k, v in sorted(product_ratios.items(), key=lambda item: item[1], reverse=True)}
+    products = list(sorted_ratios.keys())
+    ratios = list(sorted_ratios.values())
+
+    plt.figure(figsize=(10, 6))
+    plt.barh(products, ratios, color='skyblue')
+    plt.xlabel(f'Ratio of Reviews with DRM Relevance > {threshold}')
+    plt.title(f'Ratio of Reviews with DRM Relevance > {threshold} by Product')
+    plt.gca().invert_yaxis()  # Invert y-axis to display highest ratio at the top
+    plt.tight_layout()
+    plt.savefig(output_dir + '/drm_relevance_ratio_by_product.png')
 
 def generate_plots(filename):
     plot_reviews_with_drm_relevance(filename)
     plot_ratings_over_time(filename)
     plot_drm_relevance_vs_rating(filename)
     plot_drm_relevance_by_rating_band(filename)
+    plot_drm_relevance_ratio(filename)
