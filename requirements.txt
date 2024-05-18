@@ -3,5 +3,5 @@ bs4
 nltk
 matplotlib
 pandas
-scikit-learn
 textblob
+toml

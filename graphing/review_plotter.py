@@ -1,4 +1,5 @@
 import json
+import os
 import pandas as pd
 import matplotlib
 matplotlib.use('Agg')  # Use non-interactive backend for saving to file
@@ -157,7 +158,7 @@ def plot_drm_relevance_by_rating_band(filename: str):
     # Boxplot of DRM Relevance for each Rating Band, excluding DRM relevance = 0
     reviews_df.boxplot(column='drm_relevance', by='rating_band', vert=False, grid=True, patch_artist=True)
 
-    plt.title('DRM Relevance Distribution by Rating Band (Excluding Non-Mentioned)')
+    plt.title('DRM Relevance Distribution by Rating Band')
     plt.suptitle('')
     plt.xlabel('DRM Relevance Score')
     plt.ylabel('Rating Band')
@@ -228,7 +229,15 @@ def plot_negative_reviews_with_drm_relevance(filename: str):
                  va='center', ha='right', color='blue', fontsize=8)
 
     plt.tight_layout()
-    plt.savefig(f'{output_dir}/negative_reviews_with_drm_relevance.png')
+    plot_path = os.path.join(output_dir, 'negative_reviews_with_drm_relevance.png')
+    plt.savefig(plot_path)
+    print(f"Plot saved to {plot_path}")
+
+    # Save the ratios to CSV
+    df = pd.DataFrame(sorted_products, columns=['Product', 'Negative DRM Relevance Ratio'])
+    csv_path = os.path.join(output_dir, '../csv/negative_reviews_with_drm_relevance.csv')
+    df.to_csv(csv_path, index=False)
+    print(f"Data saved to CSV at {csv_path}")
 
 def generate_plots(filename):
     plot_reviews_with_drm_relevance(filename)

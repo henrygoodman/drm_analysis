@@ -14,31 +14,46 @@ The primary goal is to conduct a comparative analysis on the effects of DRM acro
 
 ## Methodology
 
-- **Data Collection**: Accumulation of user reviews from app stores for selected media products.
-- **NLP Analysis**: Application of NLP techniques to identify DRM-related keywords and sentiments within the collected reviews.
-- **Visualization**: Generation of visual representations to showcase the relevance of DRM discussions and their correlation with user ratings over time.
+### Data Collection
+Data was strategically gathered from multiple digital platforms known for implementing DRM, including e-books, audio streaming services, video streaming platforms, and gaming applications. A custom-built web scraper was developed to automate the extraction of essential information such as the review date, user's rating, and the full text of each review, ensuring a broad and representative dataset.
+
+### NLP Analysis
+The collected data underwent preprocessing, including tokenization, normalization, and lemmatization, to facilitate detailed sentiment analysis focused on DRM-related aspects. An extensive set of DRM-related keywords was identified to pinpoint relevant sentiments in the reviews.
+
+### Visualization
+Advanced data visualization techniques were employed to generate graphical representations of the data, highlighting the prevalence of DRM discussions and their correlation with user ratings over time.
 
 ## Tools and Technologies
 
-- Programming Language: Python
-- Libraries: pandas (for data manipulation), matplotlib (for data visualization)
-- Custom modules for scraping and NLP analysis
+- **Programming Language**: Python
+- **Libraries**: 
+  - pandas: Used for data manipulation and analysis.
+  - matplotlib and seaborn: Employed for generating static, interactive, and animated visualizations.
+  - Natural Language Toolkit (NLTK): Applied for comprehensive NLP tasks.
+- **Custom Modules**: Developed for specific tasks like web scraping, data cleaning, and sentiment analysis.
 
 ## Usage
 
 The project offers a command-line interface (CLI) for executing various functions. Ensure all dependencies are installed before running the commands:
 
-```shell
+```zsh
+# Install project requirements
 pip install -r requirements.txt
 
 # Generate reviews.json from specified URLs
 python main.py --generate
 
 # Analyze sentiments in the collected reviews
-python main.py --analyze data/reviews.json
+python main.py --analyze
 
 # Generate plots based on the analyzed data
 python main.py --plot
+
+# Generate rankings .csv file from DRM Complexity toml file
+python main.py --rank
+
+# Generate correlation analyses from generated .csv files
+python main.py --gencor
 ```
 
 ## Results
@@ -63,6 +78,8 @@ Visualizations provide insight into DRM discussions within user reviews and thei
 ### Product Ratings Over Time
 ![](/data/graphs/ratings_over_time.png)
 
-## Conclusion
+### Pearson Correlation (DRM Complexity Scores vs Negative Review ratio)
+![](/data/graphs/scatter_plot_correlation_pearson.png)
 
-The findings suggest that DRM implementations can indeed influence user satisfaction. This underscores the necessity for a balanced DRM approach that safeguards content while maintaining a positive user experience.
+### Spearman Correlation (DRM Complexity Scores vs Negative Review ratio)
+![](/data/graphs/scatter_plot_correlation_spearman.png)

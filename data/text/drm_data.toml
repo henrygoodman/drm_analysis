@@ -1,0 +1,142 @@
+[[products]]
+name = "Adobe Digital Editions"
+authentication_security = "High" # Requires user login for accessing secured eBooks.
+encryption_standards = "High" # Employs Adobe Content Server for DRM.
+access_control_mechanisms = "Maximum" # eBook access is highly restricted based on purchase and library lending.
+license_management = "Maximum" # Strict DRM controls on eBook copying and sharing.
+update_and_patch_management = "High" # Frequent software updates to address security and functionality.
+user_privacy_considerations = "Moderate" # Collects some user data for analytics but maintains a balance with user privacy.
+platform_independence = "Moderate" # Compatible with multiple devices, optimized for Adobe software.
+consumer_transparency = "High" # Provides clear and detailed information on DRM restrictions in user agreements.
+fair_use_facilitation = "Low" # Severe restrictions on copying, printing, and sharing of eBooks.
+interoperability = "Moderate" # Works with various e-reader devices, but some limitations due to DRM format.
+
+[[products]]
+name = "Apple Books"
+authentication_security = "High" # Requires Apple ID linked to a payment method for transactions.
+encryption_standards = "High" # Utilizes FairPlay DRM for robust digital content protection.
+access_control_mechanisms = "High" # Content access is exclusively tied to Apple ID across authorized devices only.
+license_management = "Maximum" # Purchase locked within Apple ecosystem; non-transferable.
+update_and_patch_management = "High" # Regular updates as part of broader iOS and macOS ecosystem.
+user_privacy_considerations = "High" # Adheres to Apple's strict privacy policy for user data protection.
+platform_independence = "Low" # Restricted largely to iOS and macOS devices, limited accessibility.
+consumer_transparency = "High" # Transparent about DRM constraints and user rights.
+fair_use_facilitation = "Low" # Enforces stringent restrictions on content sharing.
+interoperability = "Low" # Limited to functioning optimally only on Apple devices.
+
+[[products]]
+name = "Audible"
+authentication_security = "High" # Requires an Amazon account for purchase and access.
+encryption_standards = "High" # Uses proprietary DRM to limit playback to authorized devices only.
+access_control_mechanisms = "Very High" # Content is tightly locked to the user account and specific devices.
+license_management = "Maximum" # Restricts resale or broad sharing of audiobooks.
+update_and_patch_management = "Moderate" # Regular updates enhance functionality and security.
+user_privacy_considerations = "Moderate" # Utilizes user data for personalization and marketing purposes.
+platform_independence = "Moderate" # Accessible on various platforms, though dependent on app installation.
+consumer_transparency = "Moderate" # DRM restrictions are outlined but can lack detail in specificity.
+fair_use_facilitation = "Low" # Extremely limited sharing features, focusing on individual usage.
+interoperability = "Moderate" # Compatible across many devices, yet playback is tied to specific software.
+
+[[products]]
+name = "Apple Music"
+authentication_security = "High" # Requires Apple ID with two-factor authentication for enhanced security.
+encryption_standards = "High" # Employs FairPlay DRM, effectively protecting streaming content.
+access_control_mechanisms = "High" # Music streamed is encrypted and strictly tied to the user's subscription.
+license_management = "High" # Usage rights are confined to active subscribers, no access post-subscription.
+update_and_patch_management = "High" # Continuously updated to maintain security measures and user interface enhancements.
+user_privacy_considerations = "High" # Adheres to rigorous privacy protocols to protect user data.
+platform_independence = "High" # Available across a wide range of devices including iOS, Android, and desktop via iTunes.
+consumer_transparency = "High" # Clearly communicates subscription terms and DRM implications to users.
+fair_use_facilitation = "Low" # Does not permit copying or downloading music outside of the application.
+interoperability = "High" # Supports a broad array of devices beyond Apple's ecosystem, ensuring wide accessibility.
+
+[[products]]
+name = "Amazon Prime Video"
+authentication_security = "High" # Requires an Amazon account linked to an active subscription for access.
+encryption_standards = "High" # Implements robust DRM to secure video content across devices.
+access_control_mechanisms = "Very High" # Playback is strictly confined to devices registered to an Amazon account.
+license_management = "High" # Digital rentals and purchases are solely restricted within the Amazon ecosystem.
+update_and_patch_management = "High" # Consistently updated to introduce new features and enhance security.
+user_privacy_considerations = "Moderate" # Uses data for personalization and recommendations, maintaining a balance with privacy.
+platform_independence = "High" # Platform-agnostic, with support for a multitude of devices and operating systems.
+consumer_transparency = "Moderate" # Provides comprehensive but complex terms of service regarding DRM.
+fair_use_facilitation = "Low" # Enforces limitations on sharing content across different accounts.
+interoperability = "High" # Extensive support for a variety of devices, not restricted to Amazon-manufactured ones.
+
+[[products]]
+name = "Netflix"
+authentication_security = "High" # Requires user authentication with options for multi-device streaming based on subscription plan.
+encryption_standards = "High" # Utilizes advanced DRM technologies to safeguard streaming content.
+access_control_mechanisms = "Very High" # Enforces geographical restrictions and ties playback to subscriber accounts.
+license_management = "Maximum" # Content availability is subject to regional licensing, changes may occur based on agreements.
+update_and_patch_management = "High" # Regular updates are rolled out to ensure optimal functionality and security.
+user_privacy_considerations = "High" # Maintains strict privacy standards, although it collects extensive data for improving service.
+platform_independence = "High" # Available on nearly all internet-connected devices, offering vast accessibility.
+consumer_transparency = "High" # Provides clear documentation on terms of use and privacy policies, albeit variations in content availability.
+fair_use_facilitation = "Low" # Monitors and restricts account sharing practices.
+interoperability = "High" # Excellent compatibility with a diverse range of devices and platforms, enhancing user experience.
+
+[[products]]
+name = "Steam"
+authentication_security = "High" # Requires a Steam account with optional two-factor authentication for enhanced security.
+encryption_standards = "High" # Protects user data and transactions with robust encryption methods.
+access_control_mechanisms = "High" # Employs Steam Guard and other measures to control access to games and account features.
+license_management = "High" # Purchased games are linked to an individual Steam account, subject to DRM per publisher requirements.
+update_and_patch_management = "High" # Regular updates to the Steam client and games, addressing security, functionality, and DRM compliance.
+user_privacy_considerations = "Moderate" # Collects data for service improvement and targeted advertising, adhering to privacy standards.
+platform_independence = "High" # Available on multiple operating systems (Windows, macOS, Linux) and via a web interface.
+consumer_transparency = "High" # Transparent about DRM practices and user rights in the subscriber agreement.
+fair_use_facilitation = "Moderate" # Permits some degree of sharing through Steam Family Library Sharing, though with restrictions.
+interoperability = "High" # Supports a wide range of hardware configurations and is compatible with numerous gaming peripherals.
+
+[[products]]
+name = "Steam Mobile"
+authentication_security = "High" # Requires Steam account with optional two-factor authentication via mobile.
+encryption_standards = "High" # Ensures rigorous protection of personal and payment information.
+access_control_mechanisms = "Moderate" # The mobile app is primarily used for account management rather than direct game DRM.
+license_management = "High" # Manages purchases and library through a Steam account, with DRM enforcement primarily on PC.
+update_and_patch_management = "High" # Frequent updates to the mobile app and associated services to enhance functionality and security.
+user_privacy_considerations = "Moderate" # Collects user data primarily for service improvement and targeted marketing purposes.
+platform_independence = "High" # The mobile app is available on both Android and iOS platforms.
+consumer_transparency = "High" # Provides detailed information regarding account management and purchase terms.
+fair_use_facilitation = "Moderate" # Allows family library sharing, albeit with certain limitations.
+interoperability = "High" # Seamlessly integrates with Steam services across different devices, providing a cohesive user experience.
+
+[[products]]
+name = "eBooks.com"
+authentication_security = "Moderate" # Requires user login for eBook purchases and downloads, not as stringent as others.
+encryption_standards = "Moderate" # DRM varies by publisher, commonly relying on Adobe Digital Editions, which provides adequate protection.
+access_control_mechanisms = "High" # eBooks are generally tied to specific apps or devices as per publisher's DRM policies.
+license_management = "High" # Purchases are for personal use; sharing and printing are significantly restricted.
+update_and_patch_management = "Low" # Updates are infrequent, largely dependent on publisher-driven DRM changes.
+user_privacy_considerations = "Moderate" # Collects basic user data essential for transactions and personalized recommendations.
+platform_independence = "Moderate" # Accessibility is contingent on eBook format and reader app compatibility, presenting some limitations.
+consumer_transparency = "Moderate" # Provides DRM information at the time of purchase, though clarity can vary depending on the eBook.
+fair_use_facilitation = "Low" # Typically restrictive, with limited features for lending, reflecting a strict DRM enforcement.
+interoperability = "Moderate" # Compatibility varies significantly based on DRM restrictions and eBook format, affecting cross-device usage.
+
+[[products]]
+name = "Ubisoft"
+authentication_security = "High" # Games require Uplay or Ubisoft Connect login, often necessitating online verification for play.
+encryption_standards = "Moderate" # Utilizes various DRM technologies including Denuvo to prevent piracy, though not the most stringent.
+access_control_mechanisms = "High" # Often requires a persistent online connection for major titles, enforcing strict control.
+license_management = "High" # Digital purchases are tightly bound to a Ubisoft account, with no provisions for transfer.
+update_and_patch_management = "High" # Regular updates are implemented to enhance game security and overall performance.
+user_privacy_considerations = "Moderate" # Extensive data collection on gameplay and user interactions, used for marketing and service improvements.
+platform_independence = "Moderate" # Available across multiple gaming platforms, yet each requires the installation of Ubisoft's own software.
+consumer_transparency = "Moderate" # DRM practices are disclosed within the End User License Agreement (EULA), which can be detailed and complex.
+fair_use_facilitation = "Low" # Implements strict DRM with very limited options for resale or sharing of digital content.
+interoperability = "Moderate" # Generally provides good support across various platforms, although dependent on Ubisoft software for functionality.
+
+[[products]]
+name = "Electronic Arts (EA)"
+authentication_security = "High" # Requires an EA account and often the Origin or EA Desktop app for access to games.
+encryption_standards = "Moderate" # Employs DRM such as Denuvo Anti-Tamper to inhibit piracy, offering moderate protection.
+access_control_mechanisms = "High" # Some games necessitate an online activation and continuous internet connection for play.
+license_management = "High" # Games are exclusively linked to an EA account, enforcing stringent access controls.
+update_and_patch_management = "High" # Consistently delivers updates to maintain DRM integrity and enhance game functionality.
+user_privacy_considerations = "Moderate" # Collects data for marketing purposes and to enhance gameplay experience, maintaining a reasonable level of privacy.
+platform_independence = "Moderate" # While games are available on various platforms, they are often tied to specific EA services.
+consumer_transparency = "Moderate" # Provides details on DRM in user agreements, though not always prominently highlighted.
+fair_use_facilitation = "Low" # Strict limitations on copying, modifying, or redistributing games, adhering to tight DRM policies.
+interoperability = "Moderate" # Supports cross-platform play for certain games, but DRM may vary depending on the platform and service used.

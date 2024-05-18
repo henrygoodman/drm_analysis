@@ -3,7 +3,6 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-import numpy as np
 
 # Ensure necessary NLTK data is downloaded
 nltk.download('punkt')
@@ -18,11 +17,13 @@ def save_reviews_with_score(reviews: dict, filename: str):
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(reviews, f, ensure_ascii=False, indent=4)
 
+# Load stopwords once to improve efficiency
+stop_words = set(stopwords.words('english'))
+lemmatizer = WordNetLemmatizer()
+
 def preprocess_text(text: str) -> str:
     tokens = word_tokenize(text.lower())
-    lemmatizer = WordNetLemmatizer()
-    tokens = [lemmatizer.lemmatize(token) for token in tokens if token.isalpha()]
-    tokens = [token for token in tokens if token not in stopwords.words('english')]
+    tokens = [lemmatizer.lemmatize(token) for token in tokens if token.isalpha() and token not in stop_words]
     return ' '.join(tokens)
 
 def calculate_drm_relevance(text: str, drm_keywords: list) -> float:
